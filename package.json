@@ -1,0 +1,44 @@
+{
+  "name": "bk_videojuegos",
+  "version": "1.0.0",
+  "description": "```\r Bk_VideoJuegos/\r ├─ src/\r │  ├─ app.ts\r │  ├─ server.ts\r │  ├─ config/\r │  │  └─ env.ts\r │  ├─ db/\r │  │  └─ prisma.ts\r │  ├─ middleware/\r │  │  └─ auth.ts\r │  ├─ modules/\r │  │  ├─ auth/\r │  │  │  ├─ auth.controller.ts\r │  │  │  ├─ auth.service.ts\r │  │  │  └─ auth.routes.ts\r │  │  ├─ categories/\r │  │  │  ├─ category.controller.ts\r │  │  │  ├─ category.service.ts\r │  │  │  └─ category.routes.ts\r │  │  └─ games/\r │  │     ├─ game.controller.ts\r │  │     ├─ game.service.ts\r │  │     └─ game.routes.ts\r │  ├─ utils/\r │  │  └─ api.ts\r │  └─ types/\r │     └─ index.ts\r ├─ tests/\r │  ├─ auth.test.ts\r │  ├─ category.test.ts\r │  └─ game.test.ts\r ├─ prisma/\r │  └─ schema.prisma\r ├─ .env\r ├─ package.json\r ├─ tsconfig.json\r ├─ jest.config.ts\r └─ README.md\r ```",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "jest --detectOpenHandles --forceExit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "module": "CommonJS",
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^6.19.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/jest": "^30.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.10.1",
+    "@types/supertest": "^6.0.3",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  }
+}
