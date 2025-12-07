@@ -4,7 +4,7 @@ import { createGame, associateGameToCategory, getAllGames, getGamesByCategory, d
 import { prisma } from "../../db/prisma";
 
 export const postGame = async (req: Request, res: Response) => {
-    const { name, categoryName } = req.body;
+   const { name, categoryName, platformId } = req.body;
 
     if (!name || !categoryName) {
         return res.status(400).json(apiError("VALIDATION", null, "Name and categoryName required"));
@@ -20,7 +20,7 @@ export const postGame = async (req: Request, res: Response) => {
             return res.status(404).json(apiError("CATEGORY_NOT_FOUND", null, "Category not found"));
         }
 
-        const game = await createGame(name, category.id);
+        const game = await createGame(name, category.id, platformId);
         res.status(201).json(apiOk(game, "Game created"));
 
     } catch (e: any) {
@@ -30,10 +30,10 @@ export const postGame = async (req: Request, res: Response) => {
 };
 
 export const putGameCategory = async (req: Request, res: Response) => {
-    const gameId = parseInt(req.params.id!, 10); // 👈 este es el id del juego
+    const gameId = req.params.id! // 👈 este es el id del juego
     const { categoryName } = req.body;
 
-    if (!Number.isFinite(gameId) || !categoryName) {
+    if (!gameId || !categoryName) {
         return res.status(400).json(apiError("VALIDATION", null, "Valid gameId and categoryName required"));
     }
 
@@ -65,15 +65,20 @@ export const getGames = async (_req: Request, res: Response) => {
 };
 
 export const getGame = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id!, 10);
-    if (!Number.isFinite(id)) {
+    const id = req.params.id!
+    if (!id) {
         return res.status(400).json(apiError("VALIDATION", null, "Valid id required"));
     }
 
     try {
         const game = await prisma.game.findUnique({
             where: { id },
-            include: { category: true }
+            include: { 
+                categories: { include: { category: true } },
+                platform: true,
+                images: true
+            },
+
         });
 
         if (!game) {
@@ -87,8 +92,8 @@ export const getGame = async (req: Request, res: Response) => {
 };
 
 export const getGamesByCat = async (req: Request, res: Response) => {
-    const cid = parseInt(req.params.categoryId!, 10);
-    if (!Number.isFinite(cid)) {
+    const cid = req.params.categoryId!
+    if (!cid) {
         return res.status(400).json(apiError("VALIDATION", null, "Valid categoryId required"));
     }
 
@@ -97,8 +102,8 @@ export const getGamesByCat = async (req: Request, res: Response) => {
 };
 
 export const removeGame = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id!, 10);
-    if (!Number.isFinite(id)) {
+    const id = req.params.id!
+    if (!id) {
         return res.status(400).json(apiError("VALIDATION", null, "Valid id required"));
     }
     try {

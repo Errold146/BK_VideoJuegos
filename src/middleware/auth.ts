@@ -15,6 +15,7 @@ export const requireAuth = (req: Request, res: Response, next: NextFunction) => 
         const payload = jwt.verify(token, env.jwtSecret) as JwtPayload;
         (req as any).user = payload;
         next();
+        
     } catch {
         return res.status(401).json({ ok: false, message: "Invalid token" });
     }

@@ -24,10 +24,10 @@ export const postCategory = async (req: Request, res: Response) => {
 };
 
 export const putCategory = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id!, 10);
+    const id = req.params.id!
     const { name } = req.body;
 
-    if (!Number.isFinite(id) || !name) {
+    if (!id || !name) {
         return res.status(400).json(apiError("VALIDATION", null, "Valid id and name required"));
     }
 
@@ -51,8 +51,8 @@ export const getCategories = async (_req: Request, res: Response) => {
 
 export const getCategory = async (req: Request, res: Response) => {
     
-    const id = parseInt(req.params.id!, 10);
-    if (!Number.isFinite(id)) {
+    const id = req.params.id!;
+    if (!id) {
         return res.status(400).json(apiError("VALIDATION", null, "Valid id required"));
     }
     
@@ -64,8 +64,8 @@ export const getCategory = async (req: Request, res: Response) => {
 };
 
 export const removeCategory = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id!, 10);
-    if (!Number.isFinite(id)) {
+    const id = req.params.id!
+    if (!id) {
         return res.status(400).json(apiError("VALIDATION", null, "Valid id required"));
     }
 

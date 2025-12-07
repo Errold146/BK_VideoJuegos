@@ -77,7 +77,7 @@ Bk_VideoJuegos/
 └─ README.md
 ```
 
-# 🚀 Endpoints principales
+## 🚀 Endpoints principales
 ## 🔐 Autenticación
 * POST /api/auth/register — Registrar usuario
 
@@ -135,7 +135,7 @@ Bk_VideoJuegos/
 
 Este proyecto incluye pruebas automatizadas con **Jest**, **Supertest** y **Prisma** para validar el correcto funcionamiento de los endpoints.
 
-### 📂 Ubicación de las pruebas
+## 📂 Ubicación de las pruebas
 Las pruebas se encuentran en la carpeta:
 
 ```
@@ -146,8 +146,10 @@ tests/
 ```
 
 
-### 🚀 Ejecución de pruebas
-Ejecutar todas las pruebas con:
+## 🚀 Ejecución de pruebas - No Ejecutar si tiene datos reales, mucho cuidado, acciones destructivas
+IMPORTANTE: Al ejecutar las pruebas se eliminaran los datos de la base de datos como parte de la prueba de "delete" con el "cascade" e insertara datos de prueba con una categoría, un Juego y un usuario, IMPORTANTE.
+
+Correr el comando:
 
 ```bash
 npm test

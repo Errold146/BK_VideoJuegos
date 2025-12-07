@@ -12,6 +12,9 @@
     "start": "node dist/server.js",
     "test": "jest --detectOpenHandles --forceExit"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

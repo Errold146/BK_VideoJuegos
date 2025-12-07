@@ -12,9 +12,11 @@ export const postRegister = async (req: Request, res: Response) => {
     try {
         const user = await register(email, password);
         res.status(201).json(apiOk({ id: user.id, email: user.email }, "User registered"));
+
     } catch (e: any) {
         const isUnique = e?.code === "P2002";
-        res.status(isUnique ? 409 : 500).json(apiError(isUnique ? "EMAIL_EXISTS" : "UNKNOWN", e?.meta, "Registration error"));
+        res.status(isUnique ? 409 : 500)
+            .json(apiError(isUnique ? "EMAIL_EXISTS" : "UNKNOWN", e?.meta, "Registration error"));
     }
 };
 
